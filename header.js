@@ -11,7 +11,7 @@ let headerHtml = `
 		<nav id="nav">
 			<ul>
 				<li class="${currentObj['home']}"><a href="index.html">Home</a></li>
-				<li class="${currentObj['research']}"><a href="research.html">Research</a></li>
+				<li class="${currentObj['research']}"><a href="research.html">Computer Science</a></li>
 				<li class="${currentObj['philosophy']}"><a href="#">Philosophy</a></li>
 				<li class="${currentObj['contact']}"><a href="#footer">Contact</a></li>
 				<!--
