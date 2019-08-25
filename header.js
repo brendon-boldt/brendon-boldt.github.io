@@ -5,13 +5,15 @@ let headerHtml = `
 <div id="header">
 
 	<!-- Logo -->
-	<h1><a href="index.html" id="logo">Brendon Boldt<em>: Computer Scientist, Philosopher, Machine Teacher</em></a></h1>
+    <!--
+        <h1><a href="index.html" id="logo">Brendon Boldt<em>: Computer Scientist, Philosopher, Machine Teacher</em></a></h1>
+    -->
+        <h1 id="logo" style="display:none;">Brendon Boldt</h1>
 
 	<!-- Nav -->
 		<nav id="nav">
 			<ul>
 				<li class="${currentObj['home']}"><a href="index.html">Home</a></li>
-				<li class="${currentObj['research']}"><a href="research.html">Computer Science</a></li>
 				<li class="${currentObj['philosophy']}"><a href="philosophy.html">Philosophy</a></li>
 				<li class="${currentObj['contact']}"><a href="#footer">Contact</a></li>
 				<!--

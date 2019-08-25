@@ -8,7 +8,9 @@ let footerHtml = `
 			<section class="6u 6u(narrower) 12u$(mobilep)">
 				<h3>Links</h3>
 				<ul class="links">
+                    <!--
 					<li><a href="https://github.com/brendon-boldt/brendon-boldt.github.io/tree/master/files/brendon_boldt_cv.pdf">Resume</a></li>
+                    -->
 					<li><a href="https://github.com/brendon-boldt/">GitHub</a></li>
 					<li><a href="https://www.linkedin.com/in/brendonjboldt/">LinkedIn</a></li>
 					<li><a href="https://scholar.google.com/citations?user=QEXlK3AAAAAJ&hl=en&oi=ao">Google Scholar</a></li>
