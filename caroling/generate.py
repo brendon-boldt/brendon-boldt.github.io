@@ -134,6 +134,11 @@ metadata = [
         "title": "I Saw Three Ships",
         "source": "http://www.hymnsandcarolsofchristmas.com/Hymns_and_Carols/i_saw_three_ships.htm",
     },
+    {
+        "file": "silent_night",
+        "title": "Silent Night, Holy Night",
+        "source": "http://www.hymnsandcarolsofchristmas.com/Hymns_and_Carols/silent_night_holy_night-1.htm",
+    },
     # {
     #     "file": "",
     #     "title": "",
