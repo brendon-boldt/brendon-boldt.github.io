@@ -149,6 +149,11 @@ metadata = [
         "title": "Good Christian Friends, Rejoice",
         "source": "http://www.hymnsandcarolsofchristmas.com/Hymns_and_Carols/good_christian_friends_rejoice.htm",
     },
+    {
+        "file": "gaudete",
+        "title": "Gaudete",
+        "source": "",
+    },
     # {
     #     "file": "",
     #     "title": "",
