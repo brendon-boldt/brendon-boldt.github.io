@@ -139,6 +139,16 @@ metadata = [
         "title": "Silent Night, Holy Night",
         "source": "http://www.hymnsandcarolsofchristmas.com/Hymns_and_Carols/silent_night_holy_night-1.htm",
     },
+    {
+        "file": "away_in",
+        "title": "Away in a Manger",
+        "source": "http://www.hymnsandcarolsofchristmas.com/Hymns_and_Carols/away_in_a_manger.htm",
+    },
+    {
+        "file": "good_christian_friends",
+        "title": "Good Christian Friends, Rejoice",
+        "source": "http://www.hymnsandcarolsofchristmas.com/Hymns_and_Carols/good_christian_friends_rejoice.htm",
+    },
     # {
     #     "file": "",
     #     "title": "",
