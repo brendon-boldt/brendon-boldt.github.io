@@ -1,0 +1,13 @@
+body {
+  max-width: 50em;
+  margin: 2em;
+}
+
+dt {
+  font-weight: 1000;
+}
+
+dl {
+  background-color: #eee;
+  padding: 1em;
+}
