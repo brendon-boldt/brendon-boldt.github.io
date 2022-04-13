@@ -11,3 +11,9 @@ dl {
   background-color: #eee;
   padding: 1em;
 }
+
+body:before {
+  content: "JMJ";
+  color: gray;
+  float: right;
+}
