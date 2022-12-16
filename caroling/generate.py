@@ -1,4 +1,15 @@
-metadata = [
+from typing import Iterator, TypedDict
+from io import TextIOWrapper
+
+class _Metadatum(TypedDict, total=False):
+    exclude: bool
+
+class Metadatum(_Metadatum):
+    file: str
+    title: str
+    source: str
+
+_metadata: list[Metadatum] = [
     {
         "file": "god_rest_ye",
         "title": "God Rest Ye Merry, Gentlemen",
@@ -23,17 +34,14 @@ metadata = [
         "file": "fathers_love",
         "title": "Of the Father's Love Begotten",
         "source": "http://www.hymnsandcarolsofchristmas.com/Hymns_and_Carols/of_the_fathers_love_begotten-1.htm",
+        "exclude": True,
     },
     {
         "file": "angel_gabriel",
         "title": "The Angel Gabriel from Heaven Came",
         "source": "http://www.hymnsandcarolsofchristmas.com/Hymns_and_Carols/gabriels_message.htm",
+        "exclude": True,
     },
-    # {
-    #     "file": "praise_ye_the_lord_of_hosts",
-    #     "title": "Praise Ye the Lord of Hosts",
-    #     "source": "",
-    # },
     {
         "file": "wenceslas",
         "title": "Good King Wenceslas",
@@ -48,26 +56,31 @@ metadata = [
         "file": "puer_natus",
         "title": "Puer Natus in Bethlehem",
         "source": "http://www.hymnsandcarolsofchristmas.com/Hymns_and_Carols/NonEnglish/puer_natus_in_bethlehem-dreves.htm",
+        "exclude": True,
     },
     {
         "file": "rose_eer",
         "title": "Lo, How a Rose E'er Blooming",
         "source": "",
+        "exclude": True,
     },
     {
         "file": "home_alone",
         "title": "Somewhere in My Memory (Home Alone)",
         "source": "https://genius.com/John-williams-home-alone-main-title-somewhere-in-my-memory-lyrics",
+        "exclude": True,
     },
     {
         "file": "dominick",
         "title": "Dominick the Donkey",
         "source": "https://www.lyrics.com/lyric/22100837/Dominick+the+Donkey",
+        "exclude": True,
     },
     {
         "file": "lord_of_hosts",
         "title": "Praise Ye the Lord",
         "source": "https://hymnary.org/text/o_praise_the_blessed_lord_of_hosts",
+        "exclude": True,
     },
     {
         "file": "ye_faithful",
@@ -91,7 +104,7 @@ metadata = [
     },
     {
         "file": "wassail",
-        "title": "Wassail! Wassail! All Over the Town",
+        "title": "Gloucestershire Wassail",
         "source": "http://www.hymnsandcarolsofchristmas.com/Hymns_and_Carols/wassail_wassail_all_over_1.htm",
     },
     {
@@ -108,6 +121,7 @@ metadata = [
         "file": "go_tell_it_on_the_mountain",
         "title": "Go Tell It on the Mountain",
         "source": "https://www.azlyrics.com/lyrics/forkingcountry/gotellitonthemountain.html",
+        "exclude": True,
     },
     {
         "file": "we_three_kings",
@@ -117,7 +131,7 @@ metadata = [
     {
         "file": "the_first_noel",
         "title": "The First Noel",
-        "source": "http://www.hymnsandcarolsofchristmas.com/Hymns_and_Carols/first_noel.htm",
+        "source": "https://www.hymnsandcarolsofchristmas.com/Hymns_and_Carols/first_nowel.htm",
     },
     {
         "file": "hark_the_herald",
@@ -128,6 +142,7 @@ metadata = [
         "file": "little_drummer_boy",
         "title": "Little Drummer Boy",
         "source": "http://www.songlyrics.com/traditional-christmas/the-little-drummer-boy-lyrics/",
+        "exclude": True,
     },
     {
         "file": "i_saw_three_ships",
@@ -146,23 +161,19 @@ metadata = [
     },
     {
         "file": "good_christian_friends",
-        "title": "Good Christian Friends, Rejoice",
+        "title": "Good Christian Men, Rejoice",
         "source": "http://www.hymnsandcarolsofchristmas.com/Hymns_and_Carols/good_christian_friends_rejoice.htm",
     },
     {
         "file": "gaudete",
         "title": "Gaudete",
         "source": "",
+        "exclude": True,
     },
-    # {
-    #     "file": "",
-    #     "title": "",
-    #     "source": "",
-    # },
 ]
 
 # <script type="text/javascript">setTimeout(() => window.location.reload(true), 3000);</script>
-HEADER = """
+HEADER_HTML = """
 <html>
 <meta charset="UTF-8">
 <head>
@@ -171,13 +182,13 @@ HEADER = """
     <h1 id="title">Brookline Carol Book</h1>
 """
 
-FOOTER = """
+FOOTER_HTML = """
 </body>
 </html>
 """
 
 
-def make_index():
+def make_index_html(metadata: list[Metadatum]) -> Iterator[str]:
     yield """<h2 id="top">Index</h2>"""
     yield "<ul>"
     for datum in metadata:
@@ -185,9 +196,7 @@ def make_index():
     yield "</ul>"
 
 
-def make_carol(datum):
-    if datum["file"] == "":
-        return
+def make_carol_html(datum: Metadatum) -> Iterator[str]:
     yield f"<h3 id='{datum['file']}'>{datum['title']}</h3>"
     yield "<p>"
     with open(f"carols/{datum['file']}") as fo:
@@ -197,21 +206,45 @@ def make_carol(datum):
     yield "<br><i><a href='#top'>Back to top</a></i>"
     yield f"<br><br><i><a target='blank' href='{datum['source']}'>Source website</a></i><br/><br/>"
 
+def make_carol_latex(datum: Metadatum) -> Iterator[str]:
+    yield f"\\subsection{{{datum['title']}}}"
+    yield f"\\label{{{datum['file']}}}\n"
+    yield "\\begin{description}[nosep,leftmargin=\parindent,labelsep=0pt]\n"
+    with open(f"carols/{datum['file']}") as fo:
+        for line in fo.readlines():
+            line = line.strip()
+            if line:
+                yield f"\\item {line.rstrip()} \n"
+            else:
+                yield "\\vspace{1.5ex}\n"
+    yield "\\end{description}\n"
 
-def write_gen(fo, gen):
+def write_gen(fo: TextIOWrapper, gen: Iterator[str]) -> None:
     for segment in gen:
         fo.write(segment)
 
-
-def main():
-    global metadata
-    metadata = sorted(metadata, key=lambda x: x["title"])
+def make_html(metadata: list[Metadatum]) -> None:
     with open("index.html", "w") as fo:
-        fo.write(HEADER)
-        write_gen(fo, make_index())
+        fo.write(HEADER_HTML)
+        write_gen(fo, make_index_html(metadata))
         for datum in metadata:
-            write_gen(fo, make_carol(datum))
-        fo.write(FOOTER)
+            if datum["file"] == "":
+                continue
+            write_gen(fo, make_carol_html(datum))
+        fo.write(FOOTER_HTML)
+
+def make_latex(metadata: list[Metadatum]) -> None:
+    with open("latex/carols.tex", "w") as fo:
+        for datum in metadata:
+            if datum["file"] == "":
+                continue
+            write_gen(fo, make_carol_latex(datum))
+
+def main() -> None:
+    metadata = sorted(_metadata, key=lambda x: x["title"])
+    metadata = [x for x in metadata if not x.get("exclude", False)]
+    make_html(metadata)
+    make_latex(metadata)
 
 
 if __name__ == "__main__":
