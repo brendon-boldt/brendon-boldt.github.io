@@ -1,6 +1,15 @@
-\documentclass{article}
-% \usepackage[papersize={5.5in,8.5in},top=0.4in,bottom=0.5in,left=0.4in, right=0.4in]{geometry}
-\usepackage[papersize={5.5in,8.5in},margin=0.35in,includefoot]{geometry}
+\documentclass[12pt]{article}
+\usepackage[papersize={5.5in,8.5in},top=0.4in,bottom=0.5in,left=0.4in, right=0.4in]{geometry}
+% \usepackage[papersize={5.5in,8.5in},margin=0.35in,includefoot]{geometry}
+
+\usepackage{makeidx}
+\usepackage[noprint,1to1]{booklet}
+% \usepackage[print,1to1]{booklet} \nofiles
+\source{\magstep0}{5.5in}{8.5in}
+\target{\magstep0}{11in}{8.5in}
+\setpdftargetpages
+\makeindex
+
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage{microtype}
@@ -11,6 +20,7 @@
 \usepackage{enumitem}
 \usepackage{tocloft}
 \usepackage{yfonts}
+\usepackage{graphicx}
 \usepackage[object=vectorian]{pgfornament}
 \usetikzlibrary{shapes.geometric,calc}
 
@@ -37,6 +47,7 @@
 
 \begin{document}
 
+\vspace*{\fill}
 \begin{center}
   \begin{tikzpicture}[every node/.style={inner sep=0pt}]
   \node[text height=8cm,text width=10cm,inner sep=0pt](vecbox){}; 
@@ -58,20 +69,38 @@
   \end{tikzpicture} 
 \end{center}
 
-% \vspace*{10ex}
-% \begin{center}
-% % https://tex.stackexchange.com/questions/75434/fancy-start-of-chapter-marks
-%   \Huge{\frakfamily{} Christmas Carols}
-% \end{center}
+\pagenumbering{gobble}
+\vfill
+\begin{center}
+  \begin{tikzpicture}[every node/.style={inner sep=0pt}]
+  \node[text height=7cm,text width=10cm,inner sep=0pt](vecbox){}; 
+  %\node[anchor=north west] at (vecbox.north west){\pgfornament[width=2cm]{63}};
+  %\node[anchor=north east] at (vecbox.north east){\pgfornament[width=2cm,symmetry=v]{63}};
+  %\node[anchor=south west] at (vecbox.south west){\pgfornament[width=2cm,symmetry=h]{63}};
+  %\node[anchor=south east] at (vecbox.south east){\pgfornament[width=2cm,symmetry=c]{63}};
+  \node[inner sep=6pt] (text) at (vecbox.center){\includegraphics[width=9cm]{cover-image}};
+  \node[anchor=north] at (vecbox.north){\pgfornament[width=9cm,symmetry=h]{87}};
+  \node[anchor=south] at (vecbox.south){\pgfornament[width=9cm]{87}};
+  \node[anchor=north,rotate=90] at (vecbox.west){\pgfornament[width=6cm,symmetry=h]{87}};
+  \node[anchor=north,rotate=-90] at (vecbox.east){\pgfornament[width=6cm,symmetry=h]{87}};
+  \end{tikzpicture} 
+  
+\end{center}
 
 \vfill
-\noindent\makebox[\textwidth][c]{%
+
+\newpage
+\vspace*{\fill}
+% \hspace{-0.19in}
+\makebox[\textwidth][c]{%
+  \small
   \begin{minipage}{3in}
+  % \begin{multicols}{2}
       \tableofcontents
+  % \end{multicols}
   \end{minipage}
 }
 \vfill
-\pagenumbering{gobble}
 
 \newpage
 \pagenumbering{arabic}
@@ -82,27 +111,55 @@
 \begin{multicols}{2}
   \input{carols}
 
-  % \noindent\loop
-  % \ifnum\value{ornnumb}<89
-  % \stepcounter{ornnumb}%
-  % ornament~\theornnumb: \pgfornament[width=1.5cm]{\theornnumb}\\[1ex]
-  % \repeat
 \end{multicols}
 
-\vfill
+% \vspace*{\fill}
+% \begin{center}
+%   \begin{tikzpicture}[every node/.style={inner sep=0pt}]
+%   \node[text height=2cm,text width=\textwidth,inner sep=0pt](vecbox){}; 
+%   % \node[inner sep=6pt] (text) at (vecbox.center){\Huge\frakfamily Christmas Carols};
+%   % \node[anchor=north,rotate=0] at (text.south){\pgfornament[width=5cm]{49}};
+%   \node[anchor=north east,rotate=20] at (vecbox.center) {\pgfornament[symmetry=h,width=2.5cm]{77}};
+%   \node[anchor=north west,rotate=-20] at (vecbox.center) {\pgfornament[symmetry=c,width=2.5cm]{77}};
+%   \node[anchor=south west,shift={(0cm,-0.40cm)},rotate=20] at (vecbox.center) {\pgfornament[symmetry=v,width=2.5cm]{77}};
+%   \node[anchor=south east,shift={(0cm,-0.40cm)},rotate=-20] at (vecbox.center) {\pgfornament[width=2.5cm]{77}};
+%   %\node[anchor=south] at (text.north){\pgfornament[width=5cm,symmetry=h]{49}};
+%   \end{tikzpicture} 
+% \end{center}
+% \vfill
+
+\newpage
+\vspace*{\fill}
 \begin{center}
-  \begin{tikzpicture}[every node/.style={inner sep=0pt}]
-  \node[text height=2cm,text width=\textwidth,inner sep=0pt](vecbox){}; 
-  % \node[inner sep=6pt] (text) at (vecbox.center){\Huge\frakfamily Christmas Carols};
-  % \node[anchor=north,rotate=0] at (text.south){\pgfornament[width=5cm]{49}};
-  \node[anchor=north east,rotate=20] at (vecbox.center) {\pgfornament[symmetry=h,width=2.5cm]{77}};
-  \node[anchor=north west,rotate=-20] at (vecbox.center) {\pgfornament[symmetry=c,width=2.5cm]{77}};
-  \node[anchor=south west,shift={(0cm,-0.40cm)},rotate=20] at (vecbox.center) {\pgfornament[symmetry=v,width=2.5cm]{77}};
-  \node[anchor=south east,shift={(0cm,-0.40cm)},rotate=-20] at (vecbox.center) {\pgfornament[width=2.5cm]{77}};
-  %\node[anchor=south] at (text.north){\pgfornament[width=5cm,symmetry=h]{49}};
-  \end{tikzpicture} 
+  \pgfornament[height=0.5in]{57}
+  \vfill
+  \includegraphics[width=0.9\textwidth]{alma-redemptoris}
+  \vfill
+  \pgfornament[symmetry=v,height=0.5in]{57}
 \end{center}
+\vspace*{\fill}
 
+\newpage
+\pagenumbering{gobble}
+\vspace*{\fill}
+\begin{center}
+  \pgfornament[width=0.9\textwidth]{45}
+  \includegraphics[width=0.9\textwidth]{back-cover}
+  \pgfornament[symmetry=h,width=0.9\textwidth]{45}
+\end{center}
+\vspace*{\fill}
 
+% \newpage \noindent\loop
+% \ifnum\value{ornnumb}<89
+% \stepcounter{ornnumb}%
+% ornament~\theornnumb: \pgfornament[width=1.5cm]{\theornnumb}\\[1ex]
+% \repeat
+
+% \newpage
+% \vspace*{\fill}
+% \begin{center}
+%   \Huge\frakfamily Merry Christmas!
+% \end{center}
+% \vspace*{\fill}
 
 \end{document}

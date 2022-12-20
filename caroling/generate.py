@@ -113,11 +113,6 @@ _metadata: list[Metadatum] = [
         "source": "http://www.hymnsandcarolsofchristmas.com/Hymns_and_Carols/o_holy_night.htm",
     },
     {
-        "file": "o_little_town_of_bethlehem",
-        "title": "O Little Town of Bethlehem",
-        "source": "http://www.hymnsandcarolsofchristmas.com/Hymns_and_Carols/o_little_town_of_bethlehem.htm",
-    },
-    {
         "file": "go_tell_it_on_the_mountain",
         "title": "Go Tell It on the Mountain",
         "source": "https://www.azlyrics.com/lyrics/forkingcountry/gotellitonthemountain.html",
@@ -170,6 +165,18 @@ _metadata: list[Metadatum] = [
         "source": "",
         "exclude": True,
     },
+    {
+        "file": "we_wish",
+        "title": "We Wish You a Merry Christmas",
+        "source": "https://www.hymnsandcarolsofchristmas.com/Hymns_and_Carols/we_wish_you_a_merry_christmas.htm",
+        "exclude": False,
+    },
+    {
+        "file": "o_little_town",
+        "title": "O Little Town of Bethlehem",
+        "source": "",
+        "exclude": False,
+    },
 ]
 
 # <script type="text/javascript">setTimeout(() => window.location.reload(true), 3000);</script>
@@ -218,6 +225,7 @@ def make_carol_latex(datum: Metadatum) -> Iterator[str]:
             else:
                 yield "\\vspace{1.5ex}\n"
     yield "\\end{description}\n"
+
 
 def write_gen(fo: TextIOWrapper, gen: Iterator[str]) -> None:
     for segment in gen:
