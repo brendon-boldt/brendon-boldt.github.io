@@ -56,7 +56,7 @@ _metadata: list[Metadatum] = [
         "file": "puer_natus",
         "title": "Puer Natus in Bethlehem",
         "source": "http://www.hymnsandcarolsofchristmas.com/Hymns_and_Carols/NonEnglish/puer_natus_in_bethlehem-dreves.htm",
-        "exclude": True,
+        "exclude": False,
     },
     {
         "file": "rose_eer",
